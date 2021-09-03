@@ -1,0 +1,13 @@
+{
+    "project_name": "My New Plugin",
+    "module_name": "{{cookiecutter.project_name|lower|replace('-', '')|replace(' ', '_')}}",
+    "github_username": "JohnDoe",
+    "github_reponame": "{{cookiecutter.module_name}}",
+    "repo": "{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}",
+    "author": "{{cookiecutter.github_username}}",
+    "description": "This plugin does this and that...",
+    "command_prefix": "foo",
+    "license": ["MIT", "GNU GPL v3.0", "Apache Software License 2.0"],
+    "year": "{% now 'utc', '%Y' %}",
+    "_extensions": ["jinja2_time.TimeExtension"]
+}
