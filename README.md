@@ -52,11 +52,11 @@ cookiecutter .
 
 ### PLUGININFO / Releaser
 
-- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `description.txt` instead. This file will be minimized and put into `PLUGININFO` during releasing.
+- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `DESCRIPTION` instead. This file will be minimized and put into `PLUGININFO` during releasing.
 - To release a new vewion use the `./releaser` script (it uses the [fish shell](https://fishshell.com/) which is not POSIX compatible so it won't work with bash)
   - It will change the prefix from `/dfoo` to `/foo` for the release
   - It will remove the `DEV` suffix from the plugin for the release
-  - It will minimize the `descriotion.txt` and put it into the `PLUGININFO`
+  - It will minimize the `DESCRIPTION` and put it into the `PLUGININFO`
   - It will increase the version by `0.0.1` by default. Change that if needed
   - After the release the version will be `x.x.x.dev0`
 

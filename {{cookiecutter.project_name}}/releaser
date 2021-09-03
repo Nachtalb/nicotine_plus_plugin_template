@@ -29,7 +29,7 @@ Description="{d}"'| \
     end
 end
 
-set -l new_description (cat description.txt | string join \\n | sed 's/"/\\\\"/g')
+set -l new_description (cat DESCRIPTION | string join \\n | sed 's/"/\\\\"/g')
 
 gen $new_version $new_authors $new_name $new_description 0 $p_info[5..-1]
 
