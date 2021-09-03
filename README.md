@@ -13,7 +13,7 @@ Before developing read the Features / Usage section to see how it works. Other t
 
 ## Generate New Plugin
 
-Clone the repo, install cookiecutter and run the wizard. You'll get a 
+Clone the repo, install cookiecutter and run the wizard. You'll get a
 
 ```bash
 git clone https://github.com/Nachtalb/nicotine_plus_plugin_template.git
@@ -28,15 +28,15 @@ cookiecutter .
 
 - The main `Plugin` class is in `module_name/__init__.py` where `module_name` is the name you defined in the questionaire
   - Methods:
-    - `log(*args, msg_args=[], level=None)`: Log anything to console (`args` can be any type, it will be cast to a string first), `msg_args` a tuple or list of values to insert into the message with `%s`, `%d` etc, `level` level string to define where the message will be posted to (console, chat, info window etc. see N+ base plugin linked above for more info
+    - `log(*args, msg_args=[], level=None)`: Log anything to console (`args` can be any type, it will be cast to a string first), `msg_args` a tuple or list of values to insert into the message with `%s`, `%d` etc, `level` level string to define where the message will be posted to (console, chat, info window etc. see N+ base plugin linked above for more info, `with_prefix` put plugin name as prefix to the message
     - `init()`: init method for the plugin. When overriden first this should be a super call
     - `pre_stop()`: method called before the plugin is disabled or N+ is quit
     - `error_window(args*, msg_args=[])`: Wrapper for `log()` to show an error window
     - `info_window(args*, msg_args=[])`: Wrapper for `log()` to show an info window
     - `settings_changed(before, after, change)`: Method called after the user changed some settings. `before` and `after` are the full settings before and after the change, `change` is a dict like `{'before': ..., 'after': ...}` which noly contains the delta
-- The plugin will automatically get any information about the repository, command prefix, version number, plugin name etc from the `PLUGININFO` file. So you don't have to care about setting these up on your own. 
+- The plugin will automatically get any information about the repository, command prefix, version number, plugin name etc from the `PLUGININFO` file. So you don't have to care about setting these up on your own.
 - Use `PeriodicJobs` from `from .base import PeriodicJob`
-  - Arguments: 
+  - Arguments:
     - `delay [1]`: how fast to run in seconds. Can be a callable that returns an int
     - `update [None]`: function to call, it can be none if you subclass `PeriodicJob` and define the method yourself
     - `name ['']`: name of the jobn
@@ -47,12 +47,12 @@ cookiecutter .
     - `resume()`: Resume the job
   - Variables:
     - `self.first_round`: A thread event that will be set after the job has run the first time. Cane be used together with `before_start` to chain jobs
-    - `self.last_run`: Unix timestamp of last job execution 
+    - `self.last_run`: Unix timestamp of last job execution
 
 
 ### PLUGININFO / Releaser
 
-- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `description.txt` instead. This file will be minimized and put into `PLUGININFO` during releasing. 
+- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `description.txt` instead. This file will be minimized and put into `PLUGININFO` during releasing.
 - To release a new vewion use the `./releaser` script (it uses the [fish shell](https://fishshell.com/) which is not POSIX compatible so it won't work with bash)
   - It will change the prefix from `/dfoo` to `/foo` for the release
   - It will remove the `DEV` suffix from the plugin for the release
@@ -63,7 +63,7 @@ cookiecutter .
 
 ### Default commands
 
-- `/prefix-update`: The plugin comes with an automatic update check from the start. It will periodically ask github for any new updates and will prompt the user. This can be disabled with a checkbox in the plugin preferences. 
+- `/prefix-update`: The plugin comes with an automatic update check from the start. It will periodically ask github for any new updates and will prompt the user. This can be disabled with a checkbox in the plugin preferences.
 - `/prefix-reload`: Reload the plugin code without the need to click throught the settings menu
 
 - During development of the project the commands will be prefix with an additional `d`. So if you entered `foo` the command will be `/dfoo`. When releasing a new version this will automatically change to `/foo`

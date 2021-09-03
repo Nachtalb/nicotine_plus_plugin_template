@@ -215,19 +215,20 @@ Check for updates on start and periodically''',
         Thread(target=_reload, daemon=True, args=(self.__name__, self.plugin_name, self.parent)).start()
         return returncode['zap']
 
-    def log(self, *msg, msg_args=[], level=None):
+    def log(self, *msg, msg_args=[], level=None, with_prefix=True):
         if len(msg) == 1:
             msg = msg[0]
         else:
             msg = ', '.join(map(str, msg))
 
-        log.add(f'{self.__name__}: {msg}', msg_args, level)
+        msg = (f'{self.__name__}: ' if with_prefix else '') + f'{msg}'
+        log.add(msg, msg_args, level)
 
-    def error_window(self, *msg, msg_args=[]):
-        self.log(*msg, msg_args=msg_args, level='important_error')
+    def error_window(self, *msg, msg_args=[], with_prefix=True):
+        self.log(*msg, msg_args=msg_args, level='important_error', with_prefix=with_prefix)
 
-    def info_window(self, *msg, msg_args=[]):
-        self.log(*msg, msg_args=msg_args, level='important_info')
+    def info_window(self, *msg, msg_args=[], with_prefix=True):
+        self.log(*msg, msg_args=msg_args, level='important_info', with_prefix=with_prefix)
 
     @property
     def update_url(self):
