@@ -2,6 +2,14 @@
 Template for easy and fast Nicotine+ plugins
 
 Before developing read the Features / Usage section to see how it works. Other than that you can take a look at [my N+ plugins](https://github.com/topics/nicotine-plus?q=user%3ANachtalb), the N+ [documented base plugin](https://github.com/nicotine-plus/nicotine-plus/blob/620538d9338acd90c3833919bd664da010270b72/pynicotine/pluginsystem.py#L571) and the [default plugins](https://github.com/nicotine-plus/nicotine-plus/tree/master/pynicotine/plugins) to find the hooks and what they do.
+## Main features
+
+- You can use more than one module
+- Easier Version management and update checker
+- Relaod command so you don't need to click around during development
+- Simple to use periodic jobs
+- Various convinience methods
+- Auto-prefix commands
 
 ## Generate New Plugin
 
