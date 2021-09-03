@@ -13,6 +13,10 @@ Open Nicotine+ settings, go to *General > Plugins* and click *+ Add
 Plugins*. After that download the latest `release`_ and extract it into
 the plugins folder.
 
+Remove the version from the folder name. The folder name must stay the
+same across version upgrades otherwise you will loose any changed
+settings.
+
 Now you can enable the *{{cookiecutter.project_name}}* plugin in the previously
 opened plugin settings.
 
