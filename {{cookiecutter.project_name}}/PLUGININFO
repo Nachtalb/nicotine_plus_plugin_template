@@ -2,5 +2,5 @@ Version="1.0.0.dev0"
 Authors=['{{cookiecutter.author}}']
 Name="{{cookiecutter.project_name}}"
 Description="{{cookiecutter.description|replace('\"', '\\\"')}}"
-Repository="{{cookiecutter.repo}}"
+Repository="{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}"
 Prefix="d{{cookiecutter.command_prefix}}"

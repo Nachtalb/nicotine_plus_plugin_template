@@ -46,5 +46,5 @@ License
 `{{cookiecutter.license}}`_
 
 .. _Nicotine+: https://nicotine-plus.github.io/nicotine-plus/
-.. _release: https://github.com/{{cookiecutter.repo}}/releases
-.. _{{cookiecutter.license}}: https://github.com/{{cookiecutter.repo}}/blob/master/LICENSE
+.. _release: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/releases
+.. _{{cookiecutter.license}}: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/blob/master/LICENSE
