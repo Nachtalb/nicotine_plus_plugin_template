@@ -1,1 +1,8 @@
 {{cookiecutter.description}}
+
+Available Commands:
+"/{{cookiecutter.command_prefix}}-update"  Check for updates
+"/{{cookiecutter.command_prefix}}-reload"  Reload the plugin code
+
+Author: https://github.com/{{cookiecutter.github_username}}
+Source: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}
