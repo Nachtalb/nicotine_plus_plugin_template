@@ -22,6 +22,7 @@ __version__ = CONFIG.get('Version', '0.0.1')
 
 if 'dev' in __version__:
     if 'Prefix' in CONFIG:
+        log.add('%' * 80 + f'\nAttention:\nYou are running this in dev mode. Prefix will be /d{CONFIG["Prefix"]}')
         CONFIG['Prefix'] = 'd' + CONFIG['Prefix']
     CONFIG['Name'] += ' DEV'
 
