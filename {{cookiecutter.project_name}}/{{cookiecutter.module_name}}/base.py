@@ -20,6 +20,11 @@ CONFIG = dict([(key, ast.literal_eval(value) if value.startswith('[') else value
 
 __version__ = CONFIG.get('Version', '0.0.1')
 
+if 'dev' in __version__:
+    if 'Prefix' in CONFIG:
+        CONFIG['PREFIX'] = 'd' + CONFIG['PREFIX']
+    CONFIG['Name'] += ' DEV'
+
 
 class Version:
     def __init__(self, major, minor, patch, dev=None):

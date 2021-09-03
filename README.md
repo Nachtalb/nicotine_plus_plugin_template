@@ -50,17 +50,6 @@ cookiecutter .
     - `self.last_run`: Unix timestamp of last job execution
 
 
-### PLUGININFO / Releaser
-
-- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `DESCRIPTION` instead. This file will be minimized and put into `PLUGININFO` during releasing.
-- To release a new vewion use the `./releaser` script (it uses the [fish shell](https://fishshell.com/) which is not POSIX compatible so it won't work with bash)
-  - It will change the prefix from `/dfoo` to `/foo` for the release
-  - It will remove the `DEV` suffix from the plugin for the release
-  - It will minimize the `DESCRIPTION` and put it into the `PLUGININFO`
-  - It will increase the version by `0.0.1` by default. Change that if needed
-  - After the release the version will be `x.x.x.dev0`
-
-
 ### Default commands
 
 - `/prefix-update`: The plugin comes with an automatic update check from the start. It will periodically ask github for any new updates and will prompt the user. This can be disabled with a checkbox in the plugin preferences.
@@ -72,3 +61,13 @@ cookiecutter .
   - Instead of `args` being a string it is now already parsed and put into a string list
   - You can call the method from other methods without caring about `initiator` or `args`. You have to only use keyword arguments tho (the first two positional arguments are computed as `initiator` and `argstring`.
 - The prefix will automatically be added to the commands. So if you define a command like `dostuff` and the prefix `foo` the final command will be `/foo-dostuff`. This is to avoid clashes with other plugins.
+- Leave the name as `''` in order to just use the prefix `/foo`
+
+
+### PLUGININFO / Releaser
+
+- Instead of writing a plugin description painstakingly into `PLUGININFO` yourself where you have to escape `"` chars and replace new lines with `\n` you can use `DESCRIPTION` instead. This file will be minimized and put into `PLUGININFO` during releasing.
+- To release a new vewion use the `./releaser` script (it uses the [fish shell](https://fishshell.com/) which is not POSIX compatible so it won't work with bash)
+  - It will minimize the `DESCRIPTION` and put it into the `PLUGININFO`
+  - It will increase the version by `0.0.1` by default. Change that if needed
+  - After the release the version will be `x.x.x.dev0`
