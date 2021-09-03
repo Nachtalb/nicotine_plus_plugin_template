@@ -22,7 +22,7 @@ __version__ = CONFIG.get('Version', '0.0.1')
 
 if 'dev' in __version__:
     if 'Prefix' in CONFIG:
-        CONFIG['PREFIX'] = 'd' + CONFIG['PREFIX']
+        CONFIG['Prefix'] = 'd' + CONFIG['Prefix']
     CONFIG['Name'] += ' DEV'
 
 
