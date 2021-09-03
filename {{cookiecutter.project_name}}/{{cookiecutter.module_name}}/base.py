@@ -163,7 +163,7 @@ Check for updates on start and periodically''',
         ]
 
         self.auto_update = PeriodicJob(name='AutoUpdate',
-                                       delay=3600,
+                                       delay=3600 * 6,  # Every 6h
                                        update=self.check_update)
         self.auto_update.start()
 
