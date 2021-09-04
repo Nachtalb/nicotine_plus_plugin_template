@@ -12,12 +12,21 @@ jobs:
         with:
           ref: ${{ '{{ env.GITHUB_REF }}' }}
           path: {{cookiecutter.module_name}}
+          submodules: recursive
       - name: zip
         uses: thedoctor0/zip-release@master
         with:
           filename: '{{cookiecutter.module_name}}.zip'
           path: '{{cookiecutter.module_name}}'
-          exclusions: '{{cookiecutter.module_name}}/*.git* {{cookiecutter.module_name}}/.gitgub {{cookiecutter.module_name}}/.gitignore {{cookiecutter.module_name}}/.flake8 {{cookiecutter.module_name}}/DESCRIPTION {{cookiecutter.module_name}}/releaser {{cookiecutter.module_name}}/_config.yml'
+          exclusions: >-
+            {{cookiecutter.module_name}}/*.git*
+            {{cookiecutter.module_name}}/.gitgub
+            {{cookiecutter.module_name}}/.gitignore
+            {{cookiecutter.module_name}}/.flake8
+            {{cookiecutter.module_name}}/DESCRIPTION
+            {{cookiecutter.module_name}}/releaser
+            {{cookiecutter.module_name}}/_config.yml
+            {{cookiecutter.module_name}}/{{cookiecutter.module_name}}/core/*.git*
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

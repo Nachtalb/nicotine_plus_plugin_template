@@ -1,0 +1,3 @@
+[submodule "{{cookiecutter.project_name}}/{{cookiecutter.module_name}}/core"]
+	path = {{cookiecutter.project_name}}/{{cookiecutter.module_name}}/core
+	url = https://github.com/Nachtalb/np_plugin.core.git

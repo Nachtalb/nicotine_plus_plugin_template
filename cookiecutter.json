@@ -3,7 +3,7 @@
     "module_name": "{{cookiecutter.project_name|lower|replace('-', '')|replace(' ', '_')}}",
     "github_username": "JohnDoe",
     "github_reponame": "{{cookiecutter.module_name}}",
-    "github_remote": ["ssh", "https"],
+    "github_remote": ["SSH", "HTTPS"],
     "author": "{{cookiecutter.github_username}}",
     "description": "This plugin does this and that...",
     "command_prefix": "foo",
