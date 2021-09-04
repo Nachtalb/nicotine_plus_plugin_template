@@ -17,7 +17,7 @@ jobs:
         with:
           filename: '{{cookiecutter.module_name}}.zip'
           path: '{{cookiecutter.module_name}}'
-          exclusions: '{{cookiecutter.module_name}}/*.git* {{cookiecutter.module_name}}/.gitgub {{cookiecutter.module_name}}/.gitignore {{cookiecutter.module_name}}/.flake8 {{cookiecutter.module_name}}/DESCRIPTION {{cookiecutter.module_name}}/releaser'
+          exclusions: '{{cookiecutter.module_name}}/*.git* {{cookiecutter.module_name}}/.gitgub {{cookiecutter.module_name}}/.gitignore {{cookiecutter.module_name}}/.flake8 {{cookiecutter.module_name}}/DESCRIPTION {{cookiecutter.module_name}}/releaser {{cookiecutter.module_name}}/_config.yml'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
