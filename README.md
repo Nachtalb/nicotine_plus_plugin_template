@@ -65,7 +65,7 @@ cookiecutter .
 - Leave the name as `''` in order to just use the prefix `/foo`
 
 
-## Utils
+### Utils
 
 `from .utils import ...`
 
