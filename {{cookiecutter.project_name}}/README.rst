@@ -5,6 +5,7 @@ A plugin for `Nicotine+`_.
 
 {{cookiecutter.description}}
 
+Plugin created with `Nicotine+ Plugin Template`_ made by `Nachtalb`_.
 
 Installation
 ------------
@@ -50,5 +51,7 @@ License
 `{{cookiecutter.license}}`_
 
 .. _Nicotine+: https://nicotine-plus.github.io/nicotine-plus/
+.. _Nicotine+ Plugin Template: https://github.com/Nachtalb/nicotine_plus_plugin_template
+.. _Nachtalb: https://github.com/Nachtalb
 .. _release: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/releases
 .. _{{cookiecutter.license}}: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/blob/master/LICENSE
