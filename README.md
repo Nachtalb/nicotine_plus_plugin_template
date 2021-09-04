@@ -39,7 +39,7 @@ Python version 3.8 and up
     - `info_window(args*, msg_args=[])`: Wrapper for `log()` to show an info window
     - `settings_changed(before, after, change)`: Method called after the user changed some settings. `before` and `after` are the full settings before and after the change, `change` is a dict like `{'before': ..., 'after': ...}` which noly contains the delta
 - The plugin will automatically get any information about the repository, command prefix, version number, plugin name etc from the `PLUGININFO` file. So you don't have to care about setting these up on your own.
-- Use `PeriodicJobs` from `from .base import PeriodicJob`
+- Use `PeriodicJobs` from `from .core.threading import PeriodicJob`
   - Arguments:
     - `delay [1]`: how fast to run in seconds. Can be a callable that returns an int
     - `update [None]`: function to call, it can be none if you subclass `PeriodicJob` and define the method yourself
@@ -65,18 +65,20 @@ Python version 3.8 and up
   - Instead of `args` being a string it is now already parsed and put into a string list
   - You can call the method from other methods without caring about `initiator` or `args`. You have to only use keyword arguments tho (the first two positional arguments are computed as `initiator` and `argstring`.
   - It allows the user to specify keyword arguments and floags in the command. So if your method looks like this `foo(x=0, y=0, flag=False)` the user can set the values like so `/foo x=1 y=10 flag`.
+  - If the command is run by the user directly (instead of via the another method) it is run in a thread to prevent N+ from freezing
 - The prefix will automatically be added to the commands. So if you define a command like `dostuff` and the prefix `foo` the final command will be `/foo-dostuff`. This is to avoid clashes with other plugins.
 - Leave the name as `''` in order to just use the prefix `/foo`
 
 
 ### Utils
 
-`from .utils import ...`
+`from .core.utils import ...`
 
 - `get(url, data=None, headers={}, timeout=30)` a easy to use version of `urllib.request.urlopen` as it allows to set `headers` and `data` directly, where when not defined `headers` is auto filled with a common user agent. It returns a `Response` which auto decodes the content to `response.content` and returns a dict if possible with parsing json with `response.json`
 - `log(*msg, msg_args=[], level=None, prefix=None)`: Simple to use logging method that accespts anything. You can set a prefix with `prefix=` the other arguments work the same as the `log` method descirbed in the main plugin
 - `command(func)`: `@command` wrapper as specified in aboves section
 - `str2num(string)`: A simple to use string to int/float converted without error throwsing. If the string cannot be parsed to a number the string will be returned again.
+- `startfile(file)`: Start a file with the default application on the pc
 
 ### PLUGININFO / Releaser
 
