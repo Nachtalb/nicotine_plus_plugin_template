@@ -21,7 +21,7 @@ USER_AGENTS = [
 def _parse_according_to_spec(spec, value):
     if isinstance(spec.annotation, bool) or isinstance(spec.default, bool):
         return False if value.lower() == 'false' else True
-    for t in [int, float]:
+    for t in [int, float, str]:
         if isinstance(spec.annotation, t) or isinstance(spec.default, t):
             try:
                 return t(value)
@@ -48,15 +48,20 @@ def command(func):
             for arg in command_args:
                 if not isinstance(arg, str):
                     continue
-                elif '=' in arg:
-                    key, value = arg.split('=')  # type: ignore
-                    key = key.strip('-')
+
+                orig_arg = arg = arg.lstrip('-')
+                arg = arg.lower()
+
+                if '=' in arg:
+                    key = arg.split('=')[0]
+                    value = orig_arg.split('=')
+
                     if key and value and key in parameters:
                         value = _parse_according_to_spec(parameters[key], value)
                         if value is None:
                             continue
                         _kwargs[key] = value
-                elif arg in parameters and (value := _parse_according_to_spec(parameters[arg], arg)) is not None:
+                elif arg in parameters and (value := _parse_according_to_spec(parameters[arg], orig_arg)) is not None:
                     _kwargs[arg] = value
         return func(self, *extra_args, *_args, **_kwargs)
     return wrapper
