@@ -1,0 +1,25 @@
+name: zip-n-release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.GITHUB_REF }}
+          path: {{cookiecutter.module_name}}
+      - name: zip
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: '{{cookiecutter.module_name}}.zip'
+          path: '{{cookiecutter.module_name}}'
+          exclusions: '{{cookiecutter.module_name}}/*.git* {{cookiecutter.module_name}}/.gitgub {{cookiecutter.module_name}}/.gitignore {{cookiecutter.module_name}}/.flake8 {{cookiecutter.module_name}}/DESCRIPTION {{cookiecutter.module_name}}/releaser'
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: '{{cookiecutter.module_name}}.zip'
+          draft: true
