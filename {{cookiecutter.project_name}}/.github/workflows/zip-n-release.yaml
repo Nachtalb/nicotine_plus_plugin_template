@@ -10,7 +10,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ env.GITHUB_REF }}
+          ref: ${{ '{{ env.GITHUB_REF }}' }}
           path: {{cookiecutter.module_name}}
       - name: zip
         uses: thedoctor0/zip-release@master
