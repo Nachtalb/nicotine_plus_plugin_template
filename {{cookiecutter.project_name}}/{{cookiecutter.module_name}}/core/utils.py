@@ -2,20 +2,33 @@ from functools import wraps
 from http.client import HTTPResponse
 import inspect
 import json
+import os
 from pathlib import Path
+import platform
 from random import choice
+import subprocess
+from threading import Thread
 from typing import Union
 from urllib.request import Request, urlopen
 
 from pynicotine.logfacility import log as nlog
 
-BASE_PATH = Path(__file__).parent.parent.absolute()
+BASE_PATH = Path(__file__).parent.parent.parent.absolute()
 
 USER_AGENTS = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',  # noqa
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0',
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393',  # noqa
 ]
+
+
+def startfile(file):
+    if platform.system() == 'Darwin':       # macOS
+        subprocess.call(('open', file))
+    elif platform.system() == 'Windows':    # Windows
+        os.startfile(file)  # type: ignore
+    else:                                   # linux variants
+        subprocess.call(('xdg-open', file))
 
 
 def _parse_according_to_spec(spec, value):
@@ -63,7 +76,13 @@ def command(func):
                         _kwargs[key] = value
                 elif arg in parameters and (value := _parse_according_to_spec(parameters[arg], orig_arg)) is not None:
                     _kwargs[arg] = value
-        return func(self, *extra_args, *_args, **_kwargs)
+
+        curframe = inspect.currentframe()
+        callframe = inspect.getouterframes(curframe, 2)
+        if callframe[1][3] == '_trigger_command':
+            Thread(target=func, args=(self, *extra_args, *_args), kwargs=_kwargs, daemon=True).start()
+        else:
+            return func(self, *extra_args, *_args, **_kwargs)
     return wrapper
 
 
