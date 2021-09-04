@@ -135,7 +135,7 @@ class Response:
         return self._json
 
 
-def get(url, headers={}, data=None, timeout=30):
+def get(url, data=None, headers={}, timeout=30):
     if 'User-Agent' not in headers:
         headers['User-Agent'] = choice(USER_AGENTS)
 
