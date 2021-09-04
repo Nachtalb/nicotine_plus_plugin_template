@@ -22,6 +22,10 @@ pip install cookiecutter
 cookiecutter .
 ```
 
+## Compatibility
+
+Python version 3.8 and up
+
 ## Features / Usage
 
 ### Main Plugin
