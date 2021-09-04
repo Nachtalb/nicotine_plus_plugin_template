@@ -1,5 +1,5 @@
 # [Nicotine+](https://nicotine-plus.github.io/nicotine-plus/) Plugin Template
-Template for easy and fast Nicotine+ plugins
+Template for easy and fast Nicotine+ plugins development
 
 Before developing read the Features / Usage section to see how it works. Other than that you can take a look at [my N+ plugins](https://github.com/topics/nicotine-plus?q=user%3ANachtalb), the N+ [documented base plugin](https://github.com/nicotine-plus/nicotine-plus/blob/620538d9338acd90c3833919bd664da010270b72/pynicotine/pluginsystem.py#L571) and the [default plugins](https://github.com/nicotine-plus/nicotine-plus/tree/master/pynicotine/plugins) to find the hooks and what they do.
 ## Main features
