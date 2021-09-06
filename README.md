@@ -75,7 +75,7 @@ In this example the command prefix was set to: `ab`
 
 ```python
 from .core.base import BasePlugin
-from .core.utils improt command
+from .core.utils import command
 
 class Plugin(BasePlugin):
 
