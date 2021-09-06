@@ -1,8 +1,11 @@
 from .core.base import BasePlugin
+from .core.utils import command
 
 
 class Plugin(BasePlugin):
     settings = {}
     metasettings = {}
-    __publiccommands__ = []
-    __privatecommands__ = []
+
+    @command
+    def echo(self, args=[]):
+        self.log(' '.join(map(str, args)))

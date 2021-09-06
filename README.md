@@ -60,15 +60,64 @@ Python version 3.8 and up
 - `/prefix-reload`: Reload the plugin code without the need to click throught the settings menu
 
 - During development of the project the commands will be prefix with an additional `d`. So if you entered `foo` the command will be `/dfoo`. When releasing a new version this will automatically change to `/foo`
-- When adding commands to the `__publiccommands__` and `__privatecommands__` you can decorate the method with `@command` from `from .utils import command` to make it esier to use:
-  - It is optional to now add `initiator` and `args` to the method (otherwhise it would be mandatory)
-  - Instead of `args` being a string it is now already parsed and put into a string list
-  - You can call the method from other methods without caring about `initiator` or `args`. You have to only use keyword arguments tho (the first two positional arguments are computed as `initiator` and `argstring`.
-  - It allows the user to specify keyword arguments and floags in the command. So if your method looks like this `foo(x=0, y=0, flag=False)` the user can set the values like so `/foo x=1 y=10 flag`.
-  - If the command is run by the user directly (instead of via the another method) it is run in a thread to prevent N+ from freezing
-- The prefix will automatically be added to the commands. So if you define a command like `dostuff` and the prefix `foo` the final command will be `/foo-dostuff`. This is to avoid clashes with other plugins.
-- Leave the name as `''` in order to just use the prefix `/foo`
 
+#### `@command`
+
+The `@command` decorator from `from .core.utils import command` is designed to make life easier. Not only eases it the registration of commands but also parses user arguments and makes sure that Nicotine+ doesn't freeze.
+
+- No interaction with `__publiccommands__` or `__privatecommands__` needed.
+- The decorator makes the `initiator` and `args` arguments optionl thus you can call the methods from other places in your script without much thought. You have to use only keyword arguments tho otherwhise the first two positional arguments will be interpreted as `initiator` and `argstring` (`argstring` will be parsed to `args`).
+
+##### Sample usage
+
+In this example the command prefix was set to: `ab`
+
+```python
+from .core.base import BasePlugin
+from .core.utils improt command
+
+class Plugin(BasePlugin):
+
+    @command                             # No arguments are given, infere command name "foo". With the prefix said above the command will be /ab-foo
+    def foo(self, args):                 # "args" is a list of parsed arguments given by the user - numbers will be int or float.
+        ...
+
+    @command
+    def foo(self, initiator):            # "initiator" where the command was run from. This will either be the user name of the partner in the private chat or the room name in the public chat
+        ...
+
+    @command
+    def foo(self, a_flag=False):         # The user may use the command like "/aa-foo a_flag", "/aa-foo a_flag=True" or "/aa-foo -a_flag" to set the argument to True
+        ...
+
+    @command
+    def foo(self, a_int: int = None):   # The user may use the command like "/aa-foo a_int=123" to define a number. Because we set the type to "int" floats like "12.3" or strings like "bar" will be ignored.
+        ...
+
+    @command(public=False)              # By default commands are available in both private and public chat. We can disable it for either chat - here we disable it for public chats.
+    def foo(self):
+        ...
+
+    @command()
+    def foo_bar(self):                  # When the commandname is infered "_" will be replaced with "-". This making the command "/ab-foo-bar"
+        ...
+
+    @command('custom-name')             # The command doesn't need to be foo - it can be whatever you wish.
+    def foo(self):
+        ...
+
+    @command(with_preix=False)          # Disable the prefix. The command will be "/foo"
+    def foo(self):
+        ...
+
+    @command()
+    def _bar(self):                      # No command is created if the command name is infered from the method name and starts with "_"
+        ...
+
+    @command(threaded=False)            # Usually the commands are run in a separata thread to prevent Nicotine+ from freezing during the execution. You can disable that behaviour.
+    def foo(self):
+        ...
+```
 
 ### Utils
 
